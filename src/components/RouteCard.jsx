@@ -34,33 +34,59 @@ function RouteCard({ route }) {
             </div>
 
             {/* Waypoints */}
-            <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800">
-                {route.route.map((stop, index) => {
-                    const isFirst = index === 0
-                    const isLast = index === route.route.length - 1
-                    
-                    let dotClasses = "w-[14px] h-[14px] rounded-full flex-shrink-0 mt-0.5 z-10 "
-                    if (isFirst) {
-                        dotClasses += "bg-blue-600 shadow-[0_0_8px_rgba(37,99,235,0.4)] border-2 border-white dark:border-gray-800"
-                    } else if (isLast) {
-                        dotClasses += "bg-red-500 shadow-[0_0_8px_rgba(239,68,68,0.4)] border-2 border-white dark:border-gray-800"
-                    } else {
-                        dotClasses += "bg-white dark:bg-gray-800 border-2 border-gray-300 dark:border-gray-500"
-                    }
+            <div className="px-4 py-3 border-t border-gray-200 dark:border-gray-700">
 
-                    return (
-                        <div key={index} className="flex items-start gap-3 py-2 relative group">
-                            {/* Connector line */}
-                            {!isLast && (
-                                <div className="absolute left-[7px] top-[24px] bottom-[-8px] w-[2px] bg-gray-200 dark:bg-gray-700 group-hover:bg-blue-200 dark:group-hover:bg-blue-900 transition-colors" />
-                            )}
-                            <div className={dotClasses} />
-                            <span className={`text-[14px] leading-[1.3] font-medium transition-colors ${!isFirst && !isLast ? 'text-gray-600 dark:text-gray-300' : 'text-gray-900 dark:text-white'}`}>
-                                {stop}
-                            </span>
-                        </div>
-                    )
-                })}
+                {
+                    route.coordinates?.slice(0, 5).map((stop, index) => {
+
+
+                        const points = route.coordinates.slice(0, 5)
+
+                        const isFirst = index === 0
+                        const isLast = index === points.length - 1
+
+
+                        return (
+
+                            <div
+                                key={index}
+                                className="flex items-start gap-3 py-2 relative"
+                            >
+
+
+                                <div
+                                    className={
+                                        `w-[14px] h-[14px] rounded-full flex-shrink-0
+${isFirst
+                                            ? "bg-blue-600"
+                                            : isLast
+                                                ? "bg-red-500"
+                                                : "bg-gray-400"}`
+                                    }
+                                />
+
+
+                                <span className="text-sm text-gray-700 dark:text-gray-300">
+
+                                    {
+                                        isFirst
+                                            ? "Starting Point"
+                                            : isLast
+                                                ? "Destination"
+                                                : `Waypoint ${index}`
+                                    }
+
+                                </span>
+
+
+                            </div>
+
+                        )
+
+                    })
+
+                }
+
             </div>
         </div>
     )
