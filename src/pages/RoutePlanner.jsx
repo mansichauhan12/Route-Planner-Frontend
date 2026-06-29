@@ -156,6 +156,7 @@ const RoutePlanner = () => {
 
                 <div className="flex-1 h-full overflow-hidden">
                     <MapPreview route={route} />
+                    {/* console.log("test"); */}
                 </div>
             </div>
         </div>
